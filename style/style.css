@@ -31,6 +31,7 @@ body {
     white-space: nowrap;
     margin-bottom: 16px;
     filter: drop-shadow(0 7px 0 rgba(0, 0, 0, .07));
+    --animate-duration: .5s;
 }
 
 .bubble-out {
@@ -39,7 +40,6 @@ body {
 
 .msg {
     font-size: 16px;
-    line-height: 22px;
     padding: 16px 32px;
     border-radius: 32px;
     display: inline-block;
@@ -50,6 +50,7 @@ body {
 }
 
 .msg span {
+    line-height: 22px;
     display: block;
 }
 
