@@ -6,14 +6,15 @@
 }
 
 body {
+    margin: 100px 0 0 150px;
     background-color: var(--background);
     font-family: 'Lato', sans-serif;
 }
 
 .title {
-    margin: 100px 0 0 150px;
     font-size: 50px;
     color: var(--primary);
+    margin-bottom: 80px;
 }
 
 #username {
@@ -22,12 +23,17 @@ body {
 }
 
 .chat {
-    width: 250px;
+    width: 500px;
     display: grid;
 }
 
+.bubble {
+    white-space: nowrap;
+    margin-bottom: 16px;
+}
+
 .bubble-out {
-    margin: 0 0 0 auto;
+    margin-left: auto;
 }
 
 .msg {
@@ -35,7 +41,23 @@ body {
     line-height: 22px;
     padding: 16px 32px;
     border-radius: 32px;
-    display: inline-flex;
+    display: inline-block;
+}
+
+.msg a {
+    color: var(--secondary);
+}
+
+.msg span {
+    display: block;
+}
+
+.msg img {
+    width: 100px;
+}
+
+.msg img + span {
+    text-align: center;
 }
 
 .msg-in {

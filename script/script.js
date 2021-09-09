@@ -8,9 +8,19 @@ class ChatBubble extends HTMLElement {
 
         const message = document.createElement('div');
         message.className = 'msg msg-' + type;
-        message.textContent = this.getAttribute('data-text');
+
+        const messageSpan = document.createElement('span');
+        messageSpan.innerHTML = this.getAttribute('data-text');
+        message.appendChild(messageSpan);
+
         const tail = document.createElement('div');
         tail.className = 'bubble-tail';
+
+        if(this.hasAttribute('data-image')) {
+            const image = document.createElement('img');
+            image.setAttribute('src', this.getAttribute('data-image'));
+            message.insertBefore(image, messageSpan);
+        }
 
         if(type === 'out') {
             this.append(message, tail);
