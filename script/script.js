@@ -1,3 +1,5 @@
+import("./external/smoothscroll.min.js").then((smoothscroll) => smoothscroll.polyfill());
+
 let messagesLength = 0;
 
 class ChatBubble extends HTMLElement {
@@ -37,13 +39,14 @@ class ChatBubble extends HTMLElement {
 
 customElements.define('msg-bubble', ChatBubble);
 
-const baseDelay = 2000;
+const baseDelay = 1800;
 function animateNext(messageIndex) {
     let delay = baseDelay;
     function animateBubble() {
         const animate = 'animate__animated animate__fadeInUp';
         const bubble = document.getElementsByTagName('msg-bubble')[messageIndex];
         bubble.style.display = '';
+        bubble.scrollIntoView({behavior: 'smooth'});
         bubble.className += ' ' + animate;
         delay += bubble.getAttribute('data-text').length * 15;
     }
