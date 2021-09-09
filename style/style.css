@@ -22,7 +22,12 @@ body {
 }
 
 .chat {
+    width: 250px;
+    display: grid;
+}
 
+.bubble-out {
+    margin: 0 0 0 auto;
 }
 
 .msg {
@@ -30,7 +35,7 @@ body {
     line-height: 22px;
     padding: 16px 32px;
     border-radius: 32px;
-    display: inline-block;
+    display: inline-flex;
 }
 
 .msg-in {
@@ -41,9 +46,6 @@ body {
 .msg-out {
     background-color: var(--primary);
     color: var(--tertiary);
-}
-
-.bubble {
 }
 
 .bubble-tail {
