@@ -1,5 +1,4 @@
 let messagesLength = 0;
-let messageIndex = 0;
 
 class ChatBubble extends HTMLElement {
     constructor() {
@@ -36,19 +35,23 @@ class ChatBubble extends HTMLElement {
     }
 }
 
-function animateBubble() {
-    if(messageIndex < messagesLength) {
-        const animate = 'animate__animated animate__fadeInUp'
-        const bubble = document.getElementsByTagName('msg-bubble')[messageIndex];
-        bubble.style.display = ''
-        bubble.className += ' ' + animate;
-        messageIndex++;
-    }
-}
-
 customElements.define('msg-bubble', ChatBubble);
 
-setInterval(() => {
-    animateBubble()
-}, 1800);
-animateBubble()
+const baseDelay = 2000;
+function animateNext(messageIndex) {
+    let delay = baseDelay;
+    function animateBubble() {
+        const animate = 'animate__animated animate__fadeInUp';
+        const bubble = document.getElementsByTagName('msg-bubble')[messageIndex];
+        bubble.style.display = '';
+        bubble.className += ' ' + animate;
+        delay += bubble.getAttribute('data-text').length * 15;
+    }
+    animateBubble();
+    setTimeout(() => {
+        if(messageIndex < messagesLength) {
+            animateNext(messageIndex + 1);
+        }
+    }, delay)
+}
+animateNext(0);
