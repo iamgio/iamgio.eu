@@ -1,90 +1,51 @@
-@keyframes opacity-animation {
-    0% {
-        opacity: 0
-    }
-    50% {
-        opacity: 1
-    }
-    100% {
-        opacity: 0
-    }
+:root {
+    --background: #FD9676;
+    --primary: #112F4C;
+    --secondary: #1595B1;
+    --tertiary: #E1E6EA;
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-    overflow-x: hidden;
-    overflow-y: hidden;
-}
-
-.gradient {
-    --gradient-start: /*#ef2f66*/ hsl(200, 60%, 40%);
-    --gradient-end: /*#ff3f42*/ hsl(260, 60%, 40%);
-    background: -moz-linear-gradient(top, var(--gradient-start) 0%, var(--gradient-end) 100%);
-    background: -webkit-linear-gradient(top, var(--gradient-start) 0%, var(--gradient-start) 100%);
-    background: -o-linear-gradient(top, var(--gradient-start) 0%, var(--gradient-end) 100%);
-    background: linear-gradient(to bottom, var(--gradient-start) 0%, var(--gradient-end) 100%);
+body {
+    background-color: var(--background);
+    font-family: 'Lato', sans-serif;
 }
 
 .title {
-    color: white;
-    font-family: Raleway, sans-serif;
-    margin-left: 8vw;
-    padding-top: 12vh;
-    line-height: 7vh;
+    margin: 100px 0 0 150px;
+    font-size: 50px;
+    color: var(--primary);
 }
 
-#name {
-    font-size: 5vw;
+#username {
+    margin-left: 50px;
+    opacity: .5;
 }
 
-#sub {
-    font-size: 1.5vw;
-    opacity: .8;
+.chat {
+
 }
 
-#arg {
-    opacity: 0;
-    animation: opacity-animation 1s 3
+.msg {
+    font-size: 16px;
+    line-height: 22px;
+    padding: 16px 32px;
+    border-radius: 32px;
+    display: inline-block;
 }
 
-.links {
-    position: absolute;
-    bottom: 10%;
-    width: 100%;
+.msg-out {
+    background-color: var(--primary);
+    color: var(--tertiary);
 }
 
-.links a {
-    display: block;
-    margin: 0 auto;
-    width: 8%;
+.bubble {
 }
 
-.links img {
-    padding-bottom: 50px;
-    filter: invert(90%) sepia(91%) saturate(34%) hue-rotate(197deg) brightness(107%) contrast(100%);
-}
-
-@media only screen and (max-width: 768px) {
-
-    .title {
-        padding-top: 10vh;
-        line-height: 5vh;
-    }
-
-    #name {
-        font-size: 10vw;
-    }
-
-    #sub {
-        font-size: 3.5vw;
-    }
-
-    .links {
-        bottom: 30%
-    }
-
-    .links a {
-        width: 15%;
-    }
+.bubble-tail {
+    width: 20px;
+    height: 15px;
+    background: url('../assets/bubble-tail.svg') no-repeat;
+    background-size: contain;
+    display: inline-block;
+    margin-left: -5px;
 }
