@@ -33,6 +33,11 @@ body {
     display: inline-block;
 }
 
+.msg-in {
+    background-color: var(--tertiary);
+    color: var(--primary);
+}
+
 .msg-out {
     background-color: var(--primary);
     color: var(--tertiary);
@@ -44,8 +49,17 @@ body {
 .bubble-tail {
     width: 20px;
     height: 15px;
-    background: url('../assets/bubble-tail.svg') no-repeat;
-    background-size: contain;
+    -webkit-mask: url('../assets/bubble-tail.svg') no-repeat;
+    mask: url('../assets/bubble-tail.svg') no-repeat;
     display: inline-block;
+}
+
+.bubble-in .bubble-tail {
+    background-color: var(--tertiary);
+    transform: scaleX(-1) translateX(-2px);
+}
+
+.bubble-out .bubble-tail {
+    background-color: var(--primary);
     margin-left: -5px;
 }
