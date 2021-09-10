@@ -1,7 +1,5 @@
 import("./external/smoothscroll.min.js").then((smoothscroll) => smoothscroll.polyfill());
 
-let messagesLength = 0;
-
 class ChatBubble extends HTMLElement {
     constructor() {
         super();
@@ -32,28 +30,36 @@ class ChatBubble extends HTMLElement {
         } else {
             this.append(tail, message);
         }
-
-        messagesLength++;
     }
 }
 
 customElements.define('msg-bubble', ChatBubble);
 
+let skipChatAnimation = false;
 const baseDelay = 1500;
+const chat = document.getElementById('chat');
+const bubbles = document.getElementsByTagName('msg-bubble');
+
+function scrollToBottom(bubble) {
+    const top = bubble ? chat.scrollTop + bubble.offsetHeight : chat.scrollHeight;
+    chat.scrollTo({top: top, behavior: 'smooth'});
+}
+
 function animateNext(messageIndex) {
-    let delay = baseDelay;
+    let delay = skipChatAnimation ? 100 : baseDelay;
     function animateBubble() {
         const animate = 'animate__animated animate__fadeInUp';
-        const bubble = document.getElementsByTagName('msg-bubble')[messageIndex];
+        const bubble = bubbles[messageIndex];
         bubble.style.display = '';
-        const chat = document.getElementById('chat');
-        chat.scrollTo({top: chat.scrollTop + bubble.offsetHeight, behavior: 'smooth'});
+        if(!skipChatAnimation) {
+            delay += bubble.getAttribute('data-text').length * 15;
+            scrollToBottom(bubble);
+        }
         bubble.className += ' ' + animate;
-        delay += bubble.getAttribute('data-text').length * 15;
     }
     animateBubble();
     setTimeout(() => {
-        if(messageIndex < messagesLength) {
+        if(messageIndex < bubbles.length) {
             animateNext(messageIndex + 1);
         }
     }, delay)
