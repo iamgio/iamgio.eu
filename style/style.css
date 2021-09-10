@@ -61,25 +61,38 @@ nav .selected {
     opacity: .5;
 }
 
+#chat-wrapper {
+    position: relative;
+    width: 500px;
+    height: 100%;
+}
+
 #chat {
     display: grid;
-    width: 500px;
-    flex: 1;
-    padding-bottom: 140px;
+    width: 100%;
+    height: 100%;
     grid-auto-rows: min-content;
     overflow-y: scroll;
     scrollbar-width: none;
-    min-height: 0;
-    height: 100%;
+    box-sizing: border-box;
+    padding-bottom: 90px;
 }
 
 #chat::-webkit-scrollbar {
     display: none;
 }
 
+#chat-scroll-gradient {
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    background: linear-gradient(var(--background), rgba(253, 150, 118, .001));
+    background: -webkit-linear-gradient(top, var(--background), rgba(253, 150, 118, .001));
+}
+
 .bubble {
     white-space: nowrap;
-    padding-bottom: 16px;
+    margin-bottom: 16px;
     filter: drop-shadow(0 7px 0 rgba(0, 0, 0, .07));
     --animate-duration: .5s;
 }

@@ -39,6 +39,7 @@ let skipChatAnimation = false;
 const baseDelay = 1500;
 const chat = document.getElementById('chat');
 const bubbles = document.getElementsByTagName('msg-bubble');
+const scrollGradient = document.getElementById('chat-scroll-gradient');
 
 function scrollToBottom(bubble) {
     const top = bubble ? chat.scrollTop + bubble.offsetHeight : chat.scrollHeight;
@@ -65,3 +66,7 @@ function animateNext(messageIndex) {
     }, delay)
 }
 animateNext(0);
+
+chat.addEventListener('scroll', () => {
+    scrollGradient.style.height = Math.min(30, chat.scrollTop) + 'px';
+})
