@@ -65,7 +65,7 @@ nav .selected {
     display: grid;
     width: 500px;
     flex: 1;
-    /*padding-bottom: 140px;*/
+    padding-bottom: 140px;
     grid-auto-rows: min-content;
     overflow-y: scroll;
     scrollbar-width: none;

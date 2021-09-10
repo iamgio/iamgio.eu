@@ -39,7 +39,7 @@ class ChatBubble extends HTMLElement {
 
 customElements.define('msg-bubble', ChatBubble);
 
-const baseDelay = 1800;
+const baseDelay = 1500;
 function animateNext(messageIndex) {
     let delay = baseDelay;
     function animateBubble() {
@@ -47,7 +47,7 @@ function animateNext(messageIndex) {
         const bubble = document.getElementsByTagName('msg-bubble')[messageIndex];
         bubble.style.display = '';
         const chat = document.getElementById('chat');
-        chat.scrollTo({top: chat.scrollHeight, behavior: 'smooth'});
+        chat.scrollTo({top: chat.scrollTop + bubble.offsetHeight, behavior: 'smooth'});
         bubble.className += ' ' + animate;
         delay += bubble.getAttribute('data-text').length * 15;
     }
