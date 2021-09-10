@@ -3,12 +3,50 @@
     --primary: #112F4C;
     --secondary: #1595B1;
     --tertiary: #E1E6EA;
+    --translucid: rgba(17, 47, 76, .12);
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
 }
 
 body {
-    margin: 100px 0 0 150px;
+    display: inline-flex;
     background-color: var(--background);
     font-family: 'Lato', sans-serif;
+}
+
+main {
+    margin: 100px 0 0 150px;
+    display: flex;
+    flex-direction: column;
+}
+
+#main-row {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+nav {
+    margin-right: 100px;
+}
+
+nav p {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--primary);
+    background-color: var(--translucid);
+    padding: 16px 24px 16px 30px;
+    border-radius: 32px 0 0 32px;
+    cursor: pointer;
+}
+
+nav .selected {
+    color: var(--tertiary);
+    background-color: var(--primary);
+    cursor: auto;
 }
 
 .title {
@@ -23,9 +61,19 @@ body {
 }
 
 .chat {
-    width: 500px;
-    padding-bottom: 140px;
     display: grid;
+    width: 500px;
+    flex: 1;
+    /*padding-bottom: 140px;*/
+    grid-auto-rows: min-content;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    min-height: 0;
+    height: 100%;
+}
+
+.chat::-webkit-scrollbar {
+    display: none;
 }
 
 .bubble {
