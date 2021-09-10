@@ -9,7 +9,7 @@ class ChatBubble extends HTMLElement {
         // in/out
         const type = this.getAttribute('type');
         this.className = 'bubble bubble-' + type;
-        // this.style.display = 'none'
+        this.style.display = 'none'
 
         const message = document.createElement('div');
         message.className = 'msg msg-' + type;
@@ -45,9 +45,10 @@ function animateNext(messageIndex) {
     function animateBubble() {
         const animate = 'animate__animated animate__fadeInUp';
         const bubble = document.getElementsByTagName('msg-bubble')[messageIndex];
-        //bubble.style.display = '';
-        //bubble.scrollIntoView({behavior: 'smooth'});
-        //bubble.className += ' ' + animate;
+        bubble.style.display = '';
+        const chat = document.getElementById('chat');
+        chat.scrollTo({top: chat.scrollHeight, behavior: 'smooth'});
+        bubble.className += ' ' + animate;
         delay += bubble.getAttribute('data-text').length * 15;
     }
     animateBubble();
