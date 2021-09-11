@@ -92,9 +92,11 @@ chat.addEventListener('scroll', () => {
 
 function onAutochatEnd(isSkipped) {
     const skip = document.getElementById('skip-btn');
-    skip.className += 'animate__animated animate__fadeOutDown animate__faster';
 
-    skip.addEventListener('animationend', () => skip.remove(), {once: true});
+    if(skip) {
+        skip.className += 'animate__animated animate__fadeOutDown animate__faster';
+        skip.addEventListener('animationend', () => skip.remove(), {once: true});
+    }
 
     if(isSkipped) {
         clearTimeout(timeoutId);
