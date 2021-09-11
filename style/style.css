@@ -29,10 +29,6 @@ main {
     overflow: hidden;
 }
 
-nav {
-    margin-right: 100px;
-}
-
 nav p {
     font-size: 16px;
     font-weight: bold;
@@ -65,6 +61,7 @@ nav .selected {
     position: relative;
     width: 500px;
     height: 100%;
+    margin: 0 100px;
 }
 
 #chat {
@@ -151,4 +148,18 @@ nav .selected {
 .bubble-out .bubble-tail {
     background-color: var(--primary);
     margin-left: -5px;
+}
+
+#skip-btn {
+    background: var(--translucid);
+    border: none;
+    color: var(--primary);
+    opacity: .8;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: underline;
+    font-family: 'Lato', sans-serif;
+    padding: 16px 32px;
+    border-radius: 32px;
+    cursor: pointer;
 }
