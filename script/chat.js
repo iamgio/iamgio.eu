@@ -43,12 +43,15 @@ class OptionBubble extends ChatBubble {
             if(this.className.indexOf('disabled') !== -1) return;
             this.className += ' disabled';
 
-            const questionBubble = new ChatBubble('out', this.getAttribute('data-text'));
-            const replyBubble = new ChatBubble('in', this.getAttribute('data-reply'));
-
             const spacer = chat.querySelector('#chat-spacer');
+
+            const questionBubble = new ChatBubble('out', this.getAttribute('data-text'));
             chat.insertBefore(questionBubble, spacer);
-            chat.insertBefore(replyBubble, spacer);
+
+            this.getAttribute('data-reply').split('|').forEach((reply) => {
+                const replyBubble = new ChatBubble('in', reply);
+                chat.insertBefore(replyBubble, spacer);
+            })
 
             animateNext(true);
 
