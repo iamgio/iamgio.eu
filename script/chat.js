@@ -1,9 +1,9 @@
 class ChatBubble extends HTMLElement {
-    constructor() {
+    constructor(_type, _text, _image, _hasTail, _onClick) {
         super();
 
         // in/out
-        const type = this.getAttribute('type');
+        const type = _type ? _type : this.getAttribute('type');
         this.className = 'bubble bubble-' + type;
         this.style.display = 'none';
 
@@ -11,19 +11,21 @@ class ChatBubble extends HTMLElement {
         message.className = 'msg msg-' + type;
 
         const messageSpan = document.createElement('span');
-        messageSpan.innerHTML = this.getAttribute('data-text');
+        messageSpan.innerHTML = _text ? _text : this.getAttribute('data-text');
 
         message.appendChild(messageSpan);
 
-        const hasTail = this.getAttribute('tail') !== 'none';
+        const hasTail = _hasTail !== false && this.getAttribute('tail') !== 'none';
         const tail = document.createElement('div');
         tail.className = 'bubble-tail';
 
-        if(this.hasAttribute('data-image')) {
+        if(_image || this.hasAttribute('data-image')) {
             const image = document.createElement('img');
-            image.setAttribute('src', this.getAttribute('data-image'));
+            image.setAttribute('src', _image ? image : this.getAttribute('data-image'));
             message.insertBefore(image, messageSpan);
         }
+
+        if(_onClick) this.addEventListener('click', _onClick);
 
         if(!hasTail) {
             this.append(message);
@@ -35,14 +37,20 @@ class ChatBubble extends HTMLElement {
     }
 }
 
-class OptionBubble extends HTMLElement {
+class OptionBubble extends ChatBubble {
     constructor() {
-        super();
+        super('out', null, null, false, () => {
+            const questionBubble = new ChatBubble('out', this.getAttribute('data-text'));
+            const replyBubble = new ChatBubble('in', this.getAttribute('data-reply'));
 
-        const text = this.getAttribute('data-text');
-        this.outerHTML = '<msg-bubble type="out" tail="none" data-text="' + text + '">';
+            const spacer = chat.querySelector('#chat-spacer');
+            chat.insertBefore(questionBubble, spacer);
+            chat.insertBefore(replyBubble, spacer);
 
-        addEventListener('click', () => console.log('test'));
+            animateNext(true);
+
+            scrollToBottom();
+        });
     }
 }
 
@@ -52,6 +60,7 @@ customElements.define('option-bubble', OptionBubble);
 let skipChatAnimation = false;
 let messageIndex = 0;
 let timeoutId;
+let autochatEnded = false;
 const baseDelay = 1500;
 const chat = document.getElementById('chat');
 const bubbles = chat.getElementsByTagName('msg-bubble');
@@ -62,27 +71,32 @@ function scrollToBottom(bubble) {
     chat.scrollTo({top: top, behavior: 'smooth'});
 }
 
-function animateNext() {
-    let delay = skipChatAnimation ? 100 : baseDelay;
-    function animateBubble() {
-        if(messageIndex >= bubbles.length) return;
+function animateBubble(bubble, ignoreSkip) {
+    const isSkipped = skipChatAnimation && ignoreSkip !== true;
+    let delay = isSkipped ? 100 : baseDelay;
 
-        const animate = 'animate__animated animate__fadeInUp';
-        const bubble = bubbles[messageIndex];
-        bubble.style.display = '';
-        if(!skipChatAnimation) {
-            delay += bubble.getAttribute('data-text').length * 15;
-            scrollToBottom(bubble);
-        }
-        bubble.className += ' ' + animate;
+    const animate = 'animate__animated animate__fadeInUp';
+    bubble.style.display = '';
+    if(!isSkipped) {
+        delay += bubble.querySelector('span').textContent.length * 15;
+        scrollToBottom(bubble);
     }
-    animateBubble();
-    timeoutId = setTimeout(() => {
-        if(messageIndex < bubbles.length) {
-            animateNext(++messageIndex);
-            if(messageIndex === bubbles.length - 1) onAutochatEnd(false);
-        }
-    }, delay)
+    bubble.className += ' ' + animate;
+
+    return delay;
+}
+
+function animateNext(ignoreSkip) {
+    if(messageIndex < bubbles.length) {
+        const delay = animateBubble(bubbles[messageIndex], ignoreSkip);
+        timeoutId = setTimeout(() => {
+            if (messageIndex < bubbles.length) {
+                messageIndex++;
+                animateNext(ignoreSkip);
+                if (messageIndex === bubbles.length - 1) onAutochatEnd(false);
+            } else clearTimeout(timeoutId);
+        }, delay)
+    }
 }
 animateNext();
 
@@ -91,11 +105,25 @@ chat.addEventListener('scroll', () => {
 })
 
 function onAutochatEnd(isSkipped) {
+    if(autochatEnded) return;
+    autochatEnded = true;
+
+    const animate = ' animate__animated animate__'
+
     const skip = document.getElementById('skip-btn');
 
     if(skip) {
-        skip.className += 'animate__animated animate__fadeOutDown animate__faster';
-        skip.addEventListener('animationend', () => skip.remove(), {once: true});
+        skip.className += animate + 'fadeOutDown animate__faster';
+        skip.addEventListener('animationend', () => {
+            skip.remove()
+            const options = document.getElementById('chat-options');
+            const optionBubbles = options.getElementsByTagName('option-bubble');
+
+            for (const option of optionBubbles) {
+                option.className += animate + 'fadeIn';
+                option.style.display = '';
+            }
+        }, {once: true});
     }
 
     if(isSkipped) {
