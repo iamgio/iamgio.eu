@@ -156,11 +156,29 @@ nav .selected {
 }
 
 #chat-options > * {
-    cursor: pointer;
+    cursor: default;
+}
+
+#chat-options > *:not(.disabled) {
+    cursor: pointer !important;
 }
 
 #chat-options .bubble-out {
     margin-left: 0;
+}
+
+@keyframes optionFadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: .3;
+    }
+}
+
+#chat-options .disabled {
+    animation-name: optionFadeOut;
+    animation-duration: .5s;
 }
 
 #skip-btn {

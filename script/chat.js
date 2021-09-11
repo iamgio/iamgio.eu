@@ -40,6 +40,9 @@ class ChatBubble extends HTMLElement {
 class OptionBubble extends ChatBubble {
     constructor() {
         super('out', null, null, false, () => {
+            if(this.className.indexOf('disabled') !== -1) return;
+            this.className += ' disabled';
+
             const questionBubble = new ChatBubble('out', this.getAttribute('data-text'));
             const replyBubble = new ChatBubble('in', this.getAttribute('data-reply'));
 
