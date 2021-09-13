@@ -73,6 +73,13 @@ const bubbles = chat.getElementsByTagName('msg-bubble');
 const scrollGradient = document.getElementById('chat-scroll-gradient');
 
 function scrollToBottom(bubble) {
+    const isMobile = document.body.clientWidth <= 768;
+    if(isMobile) {
+        const targetBubble = bubble ? bubble : bubbles[bubbles.length - 1];
+        targetBubble.scrollIntoView({behavior: 'smooth'});
+        return;
+    }
+
     const top = bubble ? chat.scrollTop + bubble.offsetHeight : chat.scrollHeight;
     chat.scrollTo({top: top, behavior: 'smooth'});
 }

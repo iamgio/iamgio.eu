@@ -1,0 +1,67 @@
+@media only screen and (max-width: 768px) {
+
+    main {
+        margin: 32px 0 0 32px;
+        display: grid;
+        grid-auto-rows: min-content;
+    }
+
+    .title {
+        font-size: 24px;
+        margin-bottom: 24px;
+        display: grid;
+    }
+
+    #main-row {
+        width: 100%;
+        display: grid;
+        overflow: auto;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    nav p {
+        border-radius: 32px;
+        font-size: 14px;
+        padding: 12px 18px 12px 18px;
+        margin-right: 16px;
+    }
+
+    #username {
+        margin-left: 0;
+        line-height: 30px;
+        font-size: 18px;
+    }
+
+    #chat-wrapper {
+        width: calc(100vw - 64px);
+        margin: 24px 0;
+    }
+
+    #chat {
+        overflow-y: hidden;
+        padding-bottom: 0;
+        position: initial;
+        height: auto;
+    }
+
+    #chat-scroll-gradient {
+        display: none;
+    }
+
+    .msg {
+        font-size: 12px;
+        padding: 16px 24px;
+    }
+
+    .msg span {
+        line-height: 16px;
+    }
+
+    .msg img {
+        width: 80px;
+        margin-bottom: 4px;
+    }
+}
