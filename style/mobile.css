@@ -35,6 +35,10 @@
         font-size: 18px;
     }
 
+    page-footer {
+        display: none; /* TODO */
+    }
+
     #chat-wrapper {
         width: calc(100vw - 64px);
         margin: 24px 0;

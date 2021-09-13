@@ -57,6 +57,25 @@ nav .selected {
     opacity: .5;
 }
 
+page-footer {
+    background-color: rgba(0, 0, 0, .1);
+    padding: 0 16px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+page-footer a {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 50px;
+}
+
 #chat-wrapper {
     position: relative;
     width: 500px;
