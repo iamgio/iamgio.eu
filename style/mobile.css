@@ -15,7 +15,7 @@
     #main-row {
         width: 100%;
         display: grid;
-        overflow: auto;
+        overflow: auto hidden;
     }
 
     nav {
@@ -67,5 +67,13 @@
     .msg img {
         width: 80px;
         margin-bottom: 4px;
+    }
+
+    #chat-options {
+        margin-bottom: 16px;
+    }
+
+    #chat-options .bubble {
+        margin-bottom: 8px;
     }
 }

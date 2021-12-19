@@ -182,10 +182,6 @@ page-footer a {
     cursor: pointer !important;
 }
 
-#chat-options .bubble-out {
-    margin-left: 0;
-}
-
 @keyframes optionFadeOut {
     from {
         opacity: 1;
