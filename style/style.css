@@ -18,7 +18,7 @@ body {
 }
 
 main {
-    margin: 100px 0 0 150px;
+    margin: 5vw 0 0 8vw;
     display: flex;
     flex-direction: column;
 }
@@ -58,7 +58,7 @@ nav .selected {
 }
 
 page-footer {
-    background-color: rgba(0, 0, 0, .1);
+    background-color: var(--translucid);
     padding: 0 16px;
     position: absolute;
     top: 0;
@@ -80,7 +80,7 @@ page-footer a {
     position: relative;
     width: 500px;
     height: 100%;
-    margin: 0 100px;
+    margin: 0 5vw;
 }
 
 #chat {
