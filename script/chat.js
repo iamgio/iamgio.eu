@@ -40,8 +40,10 @@ class ChatBubble extends HTMLElement {
 class OptionBubble extends ChatBubble {
     constructor() {
         super('out', null, null, false, () => {
-            if(this.className.indexOf('disabled') !== -1) return;
+            if(this.className.indexOf('disabled') !== -1 || interactiveChatLocked) return;
             this.className += ' disabled';
+            lockAutochat();
+            interactiveChatUsed = true;
 
             const spacer = chat.querySelector('#chat-spacer');
 
@@ -67,10 +69,13 @@ let skipChatAnimation = false;
 let messageIndex = 0;
 let timeoutId;
 let autochatEnded = false;
+let interactiveChatUsed = false;
+let interactiveChatLocked = false;
 const baseDelay = 1500;
 const chat = document.getElementById('chat');
 const bubbles = chat.getElementsByTagName('msg-bubble');
 const scrollGradient = document.getElementById('chat-scroll-gradient');
+const options = document.getElementById('chat-options');
 
 function scrollToBottom(bubble) {
     const isMobile = document.body.clientWidth <= 768;
@@ -106,9 +111,15 @@ function animateNext(ignoreSkip) {
             if (messageIndex < bubbles.length) {
                 messageIndex++;
                 animateNext(ignoreSkip);
-                if (messageIndex === bubbles.length - 1) onAutochatEnd(false);
-            } else clearTimeout(timeoutId);
-        }, delay)
+                if (messageIndex === bubbles.length - 1) {
+                    if(interactiveChatUsed) unlockAutochat();
+                    onAutochatEnd(false);
+                }
+            } else {
+                clearTimeout(timeoutId);
+                unlockAutochat();
+            }
+        }, delay);
     }
 }
 animateNext();
@@ -129,7 +140,6 @@ function onAutochatEnd(isSkipped) {
         skip.className += animate + 'fadeOutDown animate__faster';
         skip.addEventListener('animationend', () => {
             skip.remove()
-            const options = document.getElementById('chat-options');
             const optionBubbles = options.getElementsByTagName('option-bubble');
 
             for (const option of optionBubbles) {
@@ -145,4 +155,14 @@ function onAutochatEnd(isSkipped) {
             animateNext(messageIndex + 1);
         }
     }
+}
+
+function lockAutochat() {
+    options.className = 'locked';
+    interactiveChatLocked = true;
+}
+
+function unlockAutochat() {
+    options.className = 'unlocked';
+    interactiveChatLocked = false;
 }

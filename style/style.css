@@ -179,10 +179,14 @@ page-footer a {
 }
 
 #chat-options > *:not(.disabled) {
-    cursor: pointer !important;
+    cursor: pointer;
 }
 
-@keyframes optionFadeOut {
+.locked > * {
+    cursor: default !important;
+}
+
+@keyframes option-disable {
     from {
         opacity: 1;
     }
@@ -191,8 +195,36 @@ page-footer a {
     }
 }
 
+@keyframes option-lock {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: .8;
+    }
+}
+
+@keyframes option-unlock {
+    from {
+        opacity: .9;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 #chat-options .disabled {
-    animation-name: optionFadeOut;
+    animation-name: option-disable;
+    animation-duration: .5s;
+}
+
+.locked > *:not(.disabled) {
+    animation-name: option-lock;
+    animation-duration: .5s;
+}
+
+.unlocked > *:not(.disabled) {
+    animation-name: option-unlock;
     animation-duration: .5s;
 }
 
