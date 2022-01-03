@@ -81,7 +81,7 @@ function scrollToBottom(bubble) {
     const isMobile = document.body.clientWidth <= 768;
     if(isMobile) {
         const targetBubble = bubble ? bubble : bubbles[bubbles.length - 1];
-        targetBubble.scrollIntoView({behavior: 'smooth'});
+        targetBubble.scrollIntoView({behavior: interactiveChatUsed ? 'auto' : 'smooth'});
         return;
     }
 
