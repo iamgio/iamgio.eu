@@ -1,13 +1,14 @@
 @media only screen and (max-width: 768px) {
 
     main {
-        margin: 32px 0 0 32px;
+        margin: 24px 0 0 24px;
         display: grid;
         grid-auto-rows: min-content;
     }
 
     .title {
         font-size: 24px;
+        padding: 8px 0 0 8px;
         margin-bottom: 24px;
         display: grid;
     }
@@ -40,7 +41,7 @@
     }
 
     #chat-wrapper {
-        width: calc(100vw - 64px);
+        width: calc(100vw - 48px);
         margin: 24px 0;
     }
 
