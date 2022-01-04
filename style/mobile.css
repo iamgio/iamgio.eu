@@ -1,16 +1,20 @@
 @media only screen and (max-width: 768px) {
 
     main {
-        margin: 24px 0 0 24px;
+        margin: 24px 0 0 0;
         display: grid;
         grid-auto-rows: min-content;
     }
 
     .title {
         font-size: 24px;
-        padding: 8px 0 0 8px;
+        padding-top: 8px;
         margin-bottom: 24px;
         display: grid;
+    }
+
+    .title > * {
+        padding-left: 32px;
     }
 
     #main-row {
@@ -42,7 +46,7 @@
 
     #chat-wrapper {
         width: calc(100vw - 48px);
-        margin: 24px 0;
+        margin: 24px;
     }
 
     #chat {
@@ -71,10 +75,23 @@
     }
 
     #chat-options {
-        margin-bottom: 16px;
+        margin-bottom: 24px;
+        width: 100vw;
+        overflow-x: auto;
+        display: inline-flex;
+        flex-direction: row;
     }
 
     #chat-options .bubble {
-        margin-bottom: 8px;
+        margin: 0 4px;
+    }
+
+    #chat-options .bubble:first-of-type {
+        margin-left: 24px;
+    }
+
+    #skip-btn {
+        width: 100%;
+        margin: 0 24px;
     }
 }
