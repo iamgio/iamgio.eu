@@ -181,5 +181,5 @@ chat.addEventListener('scroll', () => {
 })
 
 options.addEventListener('scroll', () => {
-    optionsScrollGradient.style.width = Math.min(optionsGradientMaxWidth, options.scrollWidth / 2 - options.scrollLeft) + 'px';
+    optionsScrollGradient.style.width = Math.min(optionsGradientMaxWidth, options.scrollWidth / options.children.length - options.scrollLeft) + 'px';
 })
