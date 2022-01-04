@@ -71,12 +71,16 @@ let timeoutId;
 let autochatEnded = false;
 let interactiveChatUsed = false;
 let interactiveChatLocked = false;
-const baseDelay = 1500;
+const baseDelay = 1500; // Average time between messages
+const chatGradientMaxHeight = 30; // Max extension of chat gradient mask
+const optionsGradientMaxWidth = 80; // Max extension of options gradient mask
 const chat = document.getElementById('chat');
 const bubbles = chat.getElementsByTagName('msg-bubble');
-const scrollGradient = document.getElementById('chat-scroll-gradient');
 const options = document.getElementById('chat-options');
+const chatScrollGradient = document.querySelector('#chat-wrapper .scroll-gradient');
+const optionsScrollGradient = document.querySelector('#options-wrapper .scroll-gradient');
 
+// If bubble is defined, scrolls chat to that bubble. Otherwise, scrolls to bottom
 function scrollToBottom(bubble) {
     const isMobile = document.body.clientWidth <= 768;
     if(isMobile) {
@@ -89,6 +93,7 @@ function scrollToBottom(bubble) {
     chat.scrollTo({top: top, behavior: 'smooth'});
 }
 
+// Animates bubble entrance
 function animateBubble(bubble, ignoreSkip) {
     const isSkipped = skipChatAnimation && ignoreSkip !== true;
     let delay = isSkipped ? 100 : baseDelay;
@@ -104,6 +109,7 @@ function animateBubble(bubble, ignoreSkip) {
     return delay;
 }
 
+// Animates the next bubble available
 function animateNext(ignoreSkip) {
     if(messageIndex < bubbles.length) {
         const delay = animateBubble(bubbles[messageIndex], ignoreSkip);
@@ -122,12 +128,9 @@ function animateNext(ignoreSkip) {
         }, delay);
     }
 }
-animateNext();
+animateNext(); // Starts the chat
 
-chat.addEventListener('scroll', () => {
-    scrollGradient.style.height = Math.min(30, chat.scrollTop) + 'px';
-})
-
+// Handles the "auto-chat" end
 function onAutochatEnd(isSkipped) {
     if(autochatEnded) return;
     autochatEnded = true;
@@ -146,6 +149,8 @@ function onAutochatEnd(isSkipped) {
                 option.className += animate + 'fadeIn';
                 option.style.display = '';
             }
+
+            optionsScrollGradient.style.width = optionsGradientMaxWidth + 'px';
         }, {once: true});
     }
 
@@ -157,6 +162,8 @@ function onAutochatEnd(isSkipped) {
     }
 }
 
+// Autochat locking/unlocking
+
 function lockAutochat() {
     options.className = 'locked';
     interactiveChatLocked = true;
@@ -166,3 +173,13 @@ function unlockAutochat() {
     options.className = 'unlocked';
     interactiveChatLocked = false;
 }
+
+// Scroll gradient masks
+
+chat.addEventListener('scroll', () => {
+    chatScrollGradient.style.height = Math.min(chatGradientMaxHeight, chat.scrollTop) + 'px';
+})
+
+options.addEventListener('scroll', () => {
+    optionsScrollGradient.style.width = Math.min(optionsGradientMaxWidth, options.scrollWidth / 2 - options.scrollLeft) + 'px';
+})

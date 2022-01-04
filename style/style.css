@@ -98,7 +98,7 @@ page-footer a {
     display: none;
 }
 
-#chat-scroll-gradient {
+.scroll-gradient {
     position: absolute;
     width: 100%;
     z-index: 2;
@@ -180,6 +180,12 @@ page-footer a {
 
 #chat-options > *:not(.disabled) {
     cursor: pointer;
+}
+
+#options-wrapper .scroll-gradient {
+    display: none;
+    background: linear-gradient(right, var(--background), rgba(253, 150, 118, .01));
+    background: -webkit-linear-gradient(right, var(--background), rgba(253, 150, 118, .01));
 }
 
 .locked > * {

@@ -49,15 +49,15 @@
         margin: 24px;
     }
 
+    #chat-wrapper .scroll-gradient {
+        display: none;
+    }
+
     #chat {
         overflow-y: hidden;
         padding-bottom: 0;
         position: initial;
         height: auto;
-    }
-
-    #chat-scroll-gradient {
-        display: none;
     }
 
     .msg {
@@ -72,6 +72,16 @@
     .msg img {
         width: 80px;
         margin-bottom: 4px;
+    }
+
+    #options-wrapper {
+        position: relative;
+    }
+
+    #options-wrapper .scroll-gradient {
+        display: block;
+        right: 0;
+        height: 100%;
     }
 
     #chat-options {
