@@ -4,6 +4,7 @@
     --secondary: #1595B1;
     --tertiary: #E1E6EA;
     --translucid: rgba(17, 47, 76, .12);
+    --background-transparent: rgba(253, 150, 118, .001);
 }
 
 html, body {
@@ -102,8 +103,8 @@ page-footer a {
     position: absolute;
     width: 100%;
     z-index: 2;
-    background: linear-gradient(var(--background), rgba(253, 150, 118, .001));
-    background: -webkit-linear-gradient(top, var(--background), rgba(253, 150, 118, .001));
+    background: linear-gradient(var(--background), var(--background-transparent));
+    background: -webkit-linear-gradient(top, var(--background), var(--background-transparent));
 }
 
 .bubble {
@@ -184,8 +185,8 @@ page-footer a {
 
 #options-wrapper .scroll-gradient {
     display: none;
-    background: linear-gradient(right, var(--background), rgba(253, 150, 118, .01));
-    background: -webkit-linear-gradient(right, var(--background), rgba(253, 150, 118, .01));
+    background: linear-gradient(right, var(--background), var(--background-transparent));
+    background: -webkit-linear-gradient(right, var(--background), var(--background-transparent));
 }
 
 .locked > * {

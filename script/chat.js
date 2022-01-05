@@ -71,18 +71,19 @@ let timeoutId;
 let autochatEnded = false;
 let interactiveChatUsed = false;
 let interactiveChatLocked = false;
+const isMobile = document.body.clientWidth <= 768;
 const baseDelay = 1500; // Average time between messages
 const chatGradientMaxHeight = 30; // Max extension of chat gradient mask
 const optionsGradientMaxWidth = 80; // Max extension of options gradient mask
 const chat = document.getElementById('chat');
 const bubbles = chat.getElementsByTagName('msg-bubble');
+const optionsWrapper = document.getElementById('options-wrapper');
 const options = document.getElementById('chat-options');
 const chatScrollGradient = document.querySelector('#chat-wrapper .scroll-gradient');
-const optionsScrollGradient = document.querySelector('#options-wrapper .scroll-gradient');
+const optionsScrollGradient = optionsWrapper.querySelector('.scroll-gradient');
 
 // If bubble is defined, scrolls chat to that bubble. Otherwise, scrolls to bottom
 function scrollToBottom(bubble) {
-    const isMobile = document.body.clientWidth <= 768;
     if(isMobile) {
         const targetBubble = bubble ? bubble : bubbles[bubbles.length - 1];
         targetBubble.scrollIntoView({behavior: interactiveChatUsed ? 'auto' : 'smooth'});
@@ -178,8 +179,19 @@ function unlockAutochat() {
 
 chat.addEventListener('scroll', () => {
     chatScrollGradient.style.height = Math.min(chatGradientMaxHeight, chat.scrollTop) + 'px';
-})
+});
 
 options.addEventListener('scroll', () => {
-    optionsScrollGradient.style.width = Math.min(optionsGradientMaxWidth, options.scrollWidth / options.children.length - options.scrollLeft) + 'px';
-})
+    optionsScrollGradient.style.width = Math.min(optionsGradientMaxWidth, options.scrollWidth - options.clientWidth - options.scrollLeft) + 'px';
+});
+
+// Options opacity on scroll (mobile only)
+
+document.addEventListener('scroll', () => {
+    if(isMobile && autochatEnded) {
+        const scrollHeight = document.body.scrollHeight - document.body.clientHeight
+        const scrollY = window.scrollY;
+        const exp = Math.log(scrollHeight - scrollY);
+        optionsWrapper.style.opacity = (1 / ((exp && Number.isFinite(exp) ? exp : 1))).toString();
+    }
+});

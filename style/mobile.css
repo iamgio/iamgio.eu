@@ -61,6 +61,10 @@
         height: auto;
     }
 
+    #chat-spacer {
+        height: 72px;
+    }
+
     .msg {
         font-size: 12px;
         padding: 16px 24px;
@@ -76,7 +80,8 @@
     }
 
     #options-wrapper {
-        position: relative;
+        position: fixed;
+        bottom: 0;
     }
 
     #options-wrapper .scroll-gradient {
