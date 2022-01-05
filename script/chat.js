@@ -86,7 +86,7 @@ const optionsScrollGradient = optionsWrapper.querySelector('.scroll-gradient');
 function scrollToBottom(bubble) {
     if(isMobile) {
         const targetBubble = bubble ? bubble : bubbles[bubbles.length - 1];
-        targetBubble.scrollIntoView({behavior: interactiveChatUsed ? 'auto' : 'smooth'});
+        targetBubble.scrollIntoView({behavior: 'smooth'});
         return;
     }
 
@@ -140,6 +140,7 @@ function onAutochatEnd(isSkipped) {
 
     const skip = document.getElementById('skip-btn');
 
+
     if(skip) {
         skip.className += animate + 'fadeOutDown animate__faster';
         skip.addEventListener('animationend', () => {
@@ -150,7 +151,7 @@ function onAutochatEnd(isSkipped) {
                 option.className += animate + 'fadeIn';
                 option.style.display = '';
             }
-
+            updateOptionsOpacity();
             optionsScrollGradient.style.width = optionsGradientMaxWidth + 'px';
         }, {once: true});
     }
@@ -187,11 +188,18 @@ options.addEventListener('scroll', () => {
 
 // Options opacity on scroll (mobile only)
 
-document.addEventListener('scroll', () => {
+function evaluateOptionsOpacity(scrollHeight, scrollY) {
+    const exp = (-Math.log(scrollHeight - scrollY) + 5) / 5;
+    return exp < 0 ? 0 : exp;
+}
+
+function updateOptionsOpacity() {
     if(isMobile && autochatEnded) {
-        const scrollHeight = document.body.scrollHeight - document.body.clientHeight
+        const scrollHeight = document.body.scrollHeight - document.body.clientHeight;
         const scrollY = window.scrollY;
-        const exp = Math.log(scrollHeight - scrollY);
-        optionsWrapper.style.opacity = (1 / ((exp && Number.isFinite(exp) ? exp : 1))).toString();
+        const value = scrollHeight > 0 ? evaluateOptionsOpacity(scrollHeight, scrollY) : 0;
+        optionsWrapper.style.opacity = value.toString();
     }
-});
+}
+
+document.addEventListener('scroll', () => updateOptionsOpacity());

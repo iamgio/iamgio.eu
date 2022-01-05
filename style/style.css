@@ -187,6 +187,7 @@ page-footer a {
     display: none;
     background: linear-gradient(right, var(--background), var(--background-transparent));
     background: -webkit-linear-gradient(right, var(--background), var(--background-transparent));
+    pointer-events: none;
 }
 
 .locked > * {
