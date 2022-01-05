@@ -188,18 +188,49 @@ options.addEventListener('scroll', () => {
 
 // Options opacity on scroll (mobile only)
 
-function evaluateOptionsOpacity(scrollHeight, scrollY) {
-    const exp = (-Math.log(scrollHeight - scrollY) + 5) / 5;
-    return exp < 0 ? 0 : exp;
+function evaluateOptionsOpacity(scrollY, windowHeight, documentHeight) {
+    const factor = (scrollY + windowHeight) / documentHeight;
+    return Math.log(factor) * 10 + 1;
 }
 
 function updateOptionsOpacity() {
     if(isMobile && autochatEnded) {
-        const scrollHeight = document.body.scrollHeight - document.body.clientHeight;
-        const scrollY = window.scrollY;
-        const value = scrollHeight > 0 ? evaluateOptionsOpacity(scrollHeight, scrollY) : 0;
+        const scrollY = getYScroll();
+        const documentHeight = getDocumentHeight();
+        const windowHeight = getWindowHeight();
+        /*let el = document.getElementById('test');
+        if(!el) {
+            el = document.createElement('p');
+            el.id = 'test';
+            document.getElementById('main-row').appendChild(el);
+        }*/
+        const value = scrollY > 0 ? evaluateOptionsOpacity(scrollY, windowHeight, documentHeight) : 0;
+        //el.textContent = 'test: ' + scrollY + ' ' + scrollY + ' ' + value;
         optionsWrapper.style.opacity = value.toString();
     }
 }
 
 document.addEventListener('scroll', () => updateOptionsOpacity());
+
+function getWindowHeight() {
+    return window.innerHeight ||
+        document.documentElement.clientHeight ||
+        document.body.clientHeight || 0;
+}
+
+function getYScroll() {
+    return window.pageYOffset ||
+        document.body.scrollTop ||
+        document.documentElement.scrollTop || 0;
+}
+
+function getDocumentHeight() {
+    return Math.max(
+        document.body.scrollHeight || 0,
+        document.documentElement.scrollHeight || 0,
+        document.body.offsetHeight || 0,
+        document.documentElement.offsetHeight || 0,
+        document.body.clientHeight || 0,
+        document.documentElement.clientHeight || 0
+    );
+}
