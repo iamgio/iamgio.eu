@@ -41,7 +41,7 @@ class OptionBubble extends ChatBubble {
     constructor() {
         super('out', null, null, false, () => {
             if(this.className.indexOf('disabled') !== -1 || interactiveChatLocked) return;
-            if(optionsWrapper.style.opacity <= '0.1') return;
+            if(isMobile && optionsWrapper.style.opacity <= '0.1') return;
             this.className += ' disabled';
             lockAutochat();
             interactiveChatUsed = true;
