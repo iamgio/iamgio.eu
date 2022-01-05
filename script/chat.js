@@ -41,6 +41,7 @@ class OptionBubble extends ChatBubble {
     constructor() {
         super('out', null, null, false, () => {
             if(this.className.indexOf('disabled') !== -1 || interactiveChatLocked) return;
+            if(optionsWrapper.style.opacity <= '0.1') return;
             this.className += ' disabled';
             lockAutochat();
             interactiveChatUsed = true;
@@ -139,7 +140,6 @@ function onAutochatEnd(isSkipped) {
     const animate = ' animate__animated animate__'
 
     const skip = document.getElementById('skip-btn');
-
 
     if(skip) {
         skip.className += animate + 'fadeOutDown animate__faster';

@@ -91,11 +91,13 @@
     }
 
     #chat-options {
-        margin-bottom: 24px;
+        padding-bottom: 24px;
         width: 100vw;
         overflow-x: auto;
         display: inline-flex;
         flex-direction: row;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
     }
 
     #chat-options .bubble {
@@ -104,6 +106,10 @@
 
     #chat-options .bubble:first-of-type {
         margin-left: 24px;
+    }
+
+    #chat-options .bubble:last-of-type {
+        margin-right: 24px;
     }
 
     #skip-btn {
