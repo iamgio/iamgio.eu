@@ -19,7 +19,8 @@
 
     #main-row {
         width: 100%;
-        display: grid;
+        display: flex;
+        flex-direction: column;
         overflow: auto hidden;
     }
 
@@ -46,7 +47,7 @@
 
     #chat-wrapper {
         width: calc(100vw - 48px);
-        margin: 24px;
+        margin: 18px 24px 8px 24px;
     }
 
     #chat-wrapper .scroll-gradient {
