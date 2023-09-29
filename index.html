@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="description" content="Software developer, designer and artist.">
+    <meta name="author" content="Giorgio Garofalo">
+    <meta name="keywords" content="iAmGio, Developer, Kotlin, Java, Flutter, Artist">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,14 +13,14 @@
     <link href="style/style.css" rel="stylesheet">
     <link href="style/mobile.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="assets/favicon.png">
-    <title>iAmGio</title>
+    <title>Giorgio Garofalo</title>
 </head>
 <body>
 <main>
-    <div class="title">
-        <b>Giorgio Garofalo</b>
-        <span id="username">iAmGio</span>
-    </div>
+    <h1 class="title">
+        <strong>Giorgio Garofalo</strong>
+        <span id="username">iamgio</span>
+    </h1>
     <div id="main-row">
         <!--<nav>
             <p class="selected">About me</p>
@@ -38,7 +41,7 @@
                 <div id="chat-spacer"></div>
             </div>
         </div>
-        <div id="options-wrapper">
+        <aside id="options-wrapper">
             <div class="scroll-gradient" style="width: 0"></div>
             <div id="chat-options">
                 <button id="skip-btn" onclick="skipChatAnimation = true; onAutochatEnd(true);">Skip</button>
@@ -49,7 +52,7 @@
                 <option-bubble data-text="What's your philosophy?" data-reply="I consider every product I make worth of not<br>being explained. Weird, right? 🤯|
                                                                                I let my interfaces speak for themselves.<br>It is the tidiness and clearness that should<br>guide the user, not words.<br>It is best to invest time on a smooth user<br>experience rather than an instruction book."></option-bubble>
         </div>
-        </div>
+        </aside>
     </div>
 </main>
 <page-footer></page-footer>
