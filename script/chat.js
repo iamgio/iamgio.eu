@@ -10,10 +10,10 @@ class ChatBubble extends HTMLElement {
         const message = document.createElement('div');
         message.className = 'msg msg-' + type;
 
-        const messageSpan = document.createElement('span');
-        messageSpan.innerHTML = _text ? _text : this.getAttribute('data-text');
+        const messageParagraph = document.createElement('p');
+        messageParagraph.innerHTML = _text ? _text : this.getAttribute('data-text');
 
-        message.appendChild(messageSpan);
+        message.appendChild(messageParagraph);
 
         const hasTail = _hasTail !== false && this.getAttribute('tail') !== 'none';
         const tail = document.createElement('div');
@@ -22,7 +22,7 @@ class ChatBubble extends HTMLElement {
         if(_image || this.hasAttribute('data-image')) {
             const image = document.createElement('img');
             image.setAttribute('src', _image ? image : this.getAttribute('data-image'));
-            message.insertBefore(image, messageSpan);
+            message.insertBefore(image, messageParagraph);
         }
 
         if(_onClick) this.addEventListener('click', _onClick);
@@ -103,7 +103,7 @@ function animateBubble(bubble, ignoreSkip) {
     const animate = 'animate__animated animate__fadeInUp';
     bubble.style.display = '';
     if(!isSkipped) {
-        delay += bubble.querySelector('span').textContent.length * 15;
+        delay += bubble.querySelector('p').textContent.length * 15;
         scrollToBottom(bubble);
     }
     bubble.className += ' ' + animate;
