@@ -4,8 +4,8 @@ class Footer extends HTMLElement {
         super();
 
         const buttons = new Map([
-            ['github', 'https://github.com/iAmGio'],
-            ['telegram', 'https://t.me/iAmGio'],
+            ['github', 'https://github.com/iamgio'],
+            ['telegram', 'https://t.me/iamgio'],
             ['discord', 'https://discord.com/users/334775433612492820'],
         ]);
 
