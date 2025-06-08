@@ -55,6 +55,7 @@
     }
 
     #chat {
+        overflow-x: hidden;
         overflow-y: hidden;
         padding-bottom: 0;
         position: initial;
@@ -68,10 +69,7 @@
     .msg {
         font-size: 12px;
         padding: 16px 24px;
-    }
-
-    .msg span {
-        line-height: 16px;
+        max-width: 70vw;
     }
 
     .msg img {
@@ -110,6 +108,11 @@
 
     #chat-options .bubble:last-of-type {
         margin-right: 24px;
+    }
+
+    #chat-options .bubble .msg {
+        max-width: none;
+        text-wrap: nowrap;
     }
 
     #skip-btn {
