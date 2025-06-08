@@ -7,7 +7,7 @@
     }
 
     .title {
-        font-size: 24px;
+        font-size: 32px;
         padding-top: 8px;
         margin-bottom: 24px;
         display: grid;
@@ -67,9 +67,8 @@
     }
 
     .msg {
-        font-size: 12px;
         padding: 16px 24px;
-        max-width: 70vw;
+        max-width: 65vw;
     }
 
     .msg img {
